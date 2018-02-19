@@ -8,14 +8,25 @@ php:
   - 7.1
   - 7.2
 
-# run build against hhvm but allow them to fail
-# http://docs.travis-ci.com/user/build-configuration/#Rows-That-are-Allowed-To-Fail
 matrix:
   fast_finish: true
   include:
     - php: 5.3
       dist: precise
 
+install:
+  - composer dump-autoload
+
+before_script:
+  - phpunit --version
+
 script:
   # check syntax all PHP files, redirect stderr to file and return 0 if file is empty
-  - find . -name '*.php' -exec php -l {} > /dev/null \; 2> /tmp/lint.err ; test ! -s /tmp/lint.err
+  - |
+    find . -name '*.php' -not -path "./vendor/*" -exec php -l {} > /dev/null \; 2> /tmp/lint.err
+    if [ -s /tmp/lint.err ]
+    then
+      cat /tmp/lint.err
+      return 1
+    fi
+  - phpunit

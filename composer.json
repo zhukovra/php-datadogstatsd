@@ -32,5 +32,13 @@
         "psr-4": {
             "DataDog\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DataDog\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
     }
 }
