@@ -3,9 +3,8 @@
 namespace DataDog\Tests;
 
 use DataDog\DogStatsd;
-use PHPUnit\Framework\TestCase;
 
-class UdpTest extends TestCase
+class UdpTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var resource Listenging socket
